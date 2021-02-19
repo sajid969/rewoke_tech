@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <hr>
+    {{Filefield.choosefile}}
+    <embed src="{% static "Filefield.choose" %}" type="application/pdf" width="300" height="300">
+
+  </body>
+</html>
