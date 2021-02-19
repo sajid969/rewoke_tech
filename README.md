@@ -5,7 +5,7 @@ Django-Assignment Test
 
 Clone as zip file and open it your computer or if you have git application
 
-https://github.com/sajid969/fullthroattle_labs.git
+https://github.com/sajid969/rewoke_tech/tree/master
 Before running this project you need intall below list apps and packages
 
 Install Python 3.7 or above -> https://www.python.org/
