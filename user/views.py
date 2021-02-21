@@ -55,6 +55,11 @@ def convertpdf(request):
     form = filefieldForm(request.POST, request.FILES)
     if form.is_valid():
         r_file = request.FILES['choosefile']
-        inst = StreamingConvertedPdf(r_file)
-        return inst.stream_content()
+        inst = ConvertFileModelField(r_file)
+        r_file = inst.get_content()
+        doc_obj = models.Document()
+        doc_obj.pdf_doc = File(open(r_file.get('path'), 'rb'))
+        doc_obj.pdf_doc.name = r_file.get('name')
+        doc_obj.save()
+        return HttpResponse('ok')
     return render(request,'user/2.html',{'form':form})
