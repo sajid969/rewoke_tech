@@ -30,7 +30,7 @@ urlpatterns = [
     path('logout/',views.logoutview),
     path('filefield/',views.filefieldview),
     path('viewfile/',views.view_filefield),
-    path('list/<pk>/',views.filefield_render_pdf_view, name='filefield_render_pdf_view'),
+    path('convertpdf',views.convertpdf),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # if settings.DEBUG:

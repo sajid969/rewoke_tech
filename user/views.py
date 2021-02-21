@@ -5,8 +5,7 @@ from user.models import *
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.files import File
 from django.template.loader import get_template
-from xhtml2pdf import pisa
-from io import BytesIO
+from user.convertor import StreamingConvertedPdf
 
 # Create your views here.
 
@@ -47,23 +46,15 @@ def filefieldview(request,):
             a=filefield.objects.create(user=ct,choosefile=n)
             user=form.save()
             user.save()
-            return HttpResponseRedirect('/viewfile')
+            return HttpResponseRedirect('/convertpdf')
     return render(request,'user/filefield.html',{'form':form})
 
 
-from django_xhtml2pdf.utils import generate_pdf
 @login_required
-def filefield_render_pdf_view(request, *args, **kwargs):
-    pk = kwargs.get('pk')
-    Filefield = get_object_or_404(filefield, pk=pk)
-    template_path = 'user/2.html'
-    context = {'Filefield': Filefield}
-    template = get_template(template_path)
-    html = template.render(context)
-    response = HttpResponse(html, content_type='application/pdf')
-    response['Content-Disposition'] = 'filename="report.pdf"'
-    pisa_status = pisa.CreatePDF(
-        html, dest=response)
-    if pisa_status.err:
-       return HttpResponse('We had some errors <pre>' + html + '</pre>')
-    return response
+def convertpdf(request):
+    form = filefieldForm(request.POST, request.FILES)
+    if form.is_valid():
+        r_file = request.FILES['choosefile']
+        inst = StreamingConvertedPdf(r_file)
+        return inst.stream_content()
+    return render(request,'user/2.html',{'form':form})

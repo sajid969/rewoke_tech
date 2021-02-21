@@ -2,6 +2,7 @@ arabic-reshaper==2.1.1
 asgiref==3.3.1
 Django==3.1.6
 django-xhtml2pdf==0.0.4
+djangoconvertvdoctopdf==1.0.1
 future==0.18.2
 html5lib==1.1
 Pillow==8.1.0
