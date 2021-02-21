@@ -7,5 +7,7 @@ class signupform(forms.ModelForm):
         model=User
         fields=('username','password','email','first_name','last_name')
 
-class filefieldForm(forms.Form):
-    choosefile=forms.FileField()
+class filefieldForm(forms.ModelForm):
+    class Meta:
+        model=filefield
+        fields=['choosefile']
