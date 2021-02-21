@@ -8,7 +8,8 @@
       {% for i in choose %}
       <tr>
 
-        <a href="{% url 'filefield_render_pdf_view' i.pk %}"><button type="button" name="button">convert to pdf</button></a>
+        <a href="/convertpdf"><button type="button" name="button">convert to pdf</button></a>
+
         <td><a href="{{i.choosefile.url}}" download>{{i.choosefile}}</a></td>
         <br>
         <hr>
